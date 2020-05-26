@@ -25,6 +25,8 @@ router.get('/:id', (req, res, next) => {
 
 // Pesquisa Por Comparação SELECT * FROM `noticiahome` WHERE descricao LIKE '%mais%' OR titulo LIKE '%que%'
 /*
+//
+//
 
 //INSERE um Pedido
 router.post('/', (req, res) =>{
