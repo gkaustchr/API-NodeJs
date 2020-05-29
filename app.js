@@ -31,9 +31,10 @@ app.use(bodyParser.json());
 
 //CORS para acesso externo da API 
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*"); // aceita todos os acessos
+    res.header('Access-Control-Allow-Origin', req.headers.origin); // aceita todos os acessos
     res.header("Access-Control-Allow-Headers", 
     "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Credentials', 'true');
 
     if(req.method === 'OPTION'){
         res.header("Access-Control-Allow-Method', 'PUT, POST, PATCH, DELETE, GET");
