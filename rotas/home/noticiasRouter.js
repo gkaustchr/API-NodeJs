@@ -19,7 +19,15 @@ const pool = new Pool({
 router.get('/', async(req, res, next) =>{
     await pool.query('SELECT * FROM noticias ORDER BY id DESC;', function (error, results, fields){
         if(error) throw error;
-        res.end(JSON.stringify(results.rows))
+        if(results.rows != ""){
+            res.end(JSON.stringify(results.rows))
+        }else{
+            res.status(404).send({
+                mensagem: "Nenhuma lei cadastrada",
+                status: 404
+            });
+        }
+        
     });
 });
 
@@ -34,7 +42,8 @@ router.get('/:id', (req, res, next) => {
         }else{
             res.status(404).send({
                 mensagem: "Nenhuma notícia encontrada",
-                codigo: id
+                codigo: id,
+                status: 404
             })
         }
         
@@ -42,21 +51,24 @@ router.get('/:id', (req, res, next) => {
 });
 
 // Pesquisa Por Comparação SELECT * FROM `noticiahome` WHERE descricao LIKE '%mais%' OR titulo LIKE '%que%'
-/*
-//
-//
+
 
 //INSERE um Pedido
-router.post('/', (req, res) =>{
+router.post('/', async (req, res) =>{
     var params  = req.body;
     console.log(params);
-    sql.query('INSERT INTO normas SET ?', params, function (error, results, fields) {
+    await pool.query('INSERT INTO noticias (tema, titulo, descricao, texto, autor, data, referencia, img, imgMobile, propaganda, linkVideo, linkDownload) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)', 
+    [params.tema, params.titulo, params.descricao, params.texto, params.autor, params.data, params.referencia, params.img, 
+        params.imgMobile, params.propaganda, params.linkVideo, params.linkDownload], function (error, results, fields) {
 	  if (error) throw error;
-	  res.end(JSON.stringify(results));
+	  res.status(201).send({
+          mensagem: "Notícia cadastrada com sucesso.",
+          status: 201
+      })
 	});
 });
 
-/
+/*
 
 //UPDATE de um Atributo Normas
 router.patch('/:id', (req, res, next) => {

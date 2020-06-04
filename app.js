@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const app = express();
+//const creatTable = require('./banco/createTables')
 
 //Rotas
 const normasRouter = require('./rotas/normas/normasRouter');
@@ -57,7 +58,7 @@ app.use('/artigosdemonstracoes', artigosDemonstracoesRouter);
 app.use('/noticias', noticiaHomeRouter);
 app.use('/artigos', artigosHomeRouter);
 
-app.use('/regime', regimeRouter);
+app.use('/regimes', regimeRouter);
 app.use('/artigosregime', artigosRegimeRouter);
 
 app.use('/impostos', impostosRouter);
