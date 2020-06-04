@@ -58,7 +58,7 @@ router.post('/', async(req, res) =>{
         mensagem: "Imposto cadastrado com sucesso",
         id: req.params.id,
         status: 201
-    });
+        });
 	});
 });
 

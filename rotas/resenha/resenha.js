@@ -17,13 +17,13 @@ const pool = new Pool({
 
 // Retorna todos as normas
 router.get('/', async(req, res, next) =>{
-    await pool.query('SELECT * FROM conteudonormas;', function (error, results, fields){
+    await pool.query('SELECT * FROM resenhas;', function (error, results, fields){
         if(error) throw error;
         if(results.rows != ""){
             res.end(JSON.stringify(results.rows))
         }else{
             res.status(404).send({
-                mensagem: "Nenhum conteudo cadastrado",
+                mensagem: "Nenhuma resenha cadastrada",
                 status: 404
             });
         }
@@ -33,13 +33,13 @@ router.get('/', async(req, res, next) =>{
 
 //Lista Todos Texto da Norma x
 router.get('/:id', async(req, res, next) => {
-    await pool.query('select * from conteudonormas where idNorma = $1', [req.params.id], function (error, results, fields) {
+    await pool.query('select * from resenhas where id = $1', [req.params.id], function (error, results, fields) {
         if (error) throw error;
         if(results.rows != ""){
             res.end(JSON.stringify(results.rows))
         }else{
             res.status(404).send({
-                mensagem: "Conteudo não encontrado",
+                mensagem: "Resenha não encontrado",
                 id: req.params.id,
                 status: 404
             });
@@ -48,16 +48,16 @@ router.get('/:id', async(req, res, next) => {
 });
 
 //SELECT ConteudoNormas por IdNormas
-router.get('/:idNorma/conteudo/:idConteudo', async(req, res, next) => {
-    await pool.query('select * from conteudonormas where idNorma= $1 AND id= $2', [req.params.idNorma, req.params.idConteudo] , function (error, results, fields) {
+router.get('/:codigo/idcodigo/:idCodigo', async(req, res, next) => {
+    await pool.query('select * from resenhas where codigo= $1 AND idCodigo= $2', [req.params.codigo, req.params.idCodigo] , function (error, results, fields) {
         if (error) throw error;
         if(results.rows != ""){
             res.end(JSON.stringify(results.rows))
         }else{
             res.status(404).send({
-                mensagem: "Conteudo da Normas não encontrado cadastrado",
-                conteudo: req.params.idConteudo,
-                norma: req.params.idNorma,
+                mensagem: "Resenha selecionada não encontrado",
+                codigo: req.params.codigo,
+                idCodigo: req.params.idCodigo,
                 status: 404
             });
         }
@@ -68,14 +68,14 @@ router.get('/:idNorma/conteudo/:idConteudo', async(req, res, next) => {
 router.post('/', async (req, res) =>{
     var params  = req.body;
     console.log(params);
-    await pool.query('INSERT INTO conteudonormas (idNorma, titulo, abreviacao, descricao, texto, pdf, referencia, img, imgMobile, propaganda, linkVideo, linkDownload) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)', 
-    [params.idNorma, params.titulo, params.abreviacao, params.descricao, params.texto, params.pdf, params.referencia, params.img, 
+    await pool.query('INSERT INTO resenhas (idCodigo, codigo, tema, titulo, descricao, texto, pdf, autor, data, referencia, img, imgMobile, propaganda, linkVideo, linkDownload) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)', 
+    [params.idCodigo, params.codigo, params.tema, params.titulo, params.descricao, params.texto, params.pdf, params.autor, params.data, params.referencia, params.img, 
         params.imgMobile, params.propaganda, params.linkVideo, params.linkDownload], function (error, results, fields) {
       if (error) throw error;
       res.status(201).send({
-        mensagem: "Conteudo cadastrado com sucesso",
-        id: req.params.id,
-        norma: req.params.idNorma,
+        mensagem: "Resenha cadastrada com sucesso",
+        codigo: req.params.codigo,
+        idCodigo: req.params.idCodigo,
         status: 201
         });
     });
