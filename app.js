@@ -69,9 +69,26 @@ app.use((req, res, next) => {
 app.use((error, req, res, next) => {
     res.status(error.status || 500);
     return res.send({
-        erro: {
-            mensagem: error.message
-        }
+        mensagem: "Rotas da API Guia Bolso",
+        GETnoticias: "/noticias",
+        GETselecionarNoticia: "/noticias/id",    
+        GETartigos: "/artigos",
+        GETselecionarArtigo: "/artigos/id",
+        GETnormas: "/normas",
+        GETselecionarNorma: "/normas/id",
+        DELETEdeletarNorma: "/normas/id",
+        GETconteudoNormas: "/conteudonormas",
+        GETselecionarConteudoNorma: "/conteudonormas/norma/id",
+        GETleis: "/leis",
+        GETselecionarLei: "/leis/id",
+        GETregimes: "/regimes",
+        GETselecionarRegimes: "/regimes/id",
+        GETimpostos: "/impostos",
+        GETselecionarImposto: "/impostos/id",
+        GETresenha: "/resenhas",
+        GETselecionarResenha: "/resenhas/id",
+        GETselecionarResenhaConteudoPrincipal: "/resenhas/:codigo/idcodigo/:idCodigo",
+       
     });
 });
 

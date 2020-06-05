@@ -9,16 +9,15 @@ var connection = mysql.createPool({
 });
 
 module.exports = connection;*/
-const pg  = require('pg');
-const cliente = new pg.Client({
-    user: 'urraxlvlfdnhbs',
-    host: 'ec2-3-231-16-122.compute-1.amazonaws.com',
-    database: 'd2104pj32c4hmd',
-    password: '1cef42cfa48b2faeffa2b2f08fdaff16fdc452b7a4cbaa6ebbeab9feac18ef01',
-    port: 5432,
-    ssl:{
-        rejectUnauthorized: false
-    }
-    
-})
-module.exports = cliente;
+const {Pool} =  require('pg');
+const pool = new Pool({
+  host: 'ec2-34-225-162-157.compute-1.amazonaws.com', 
+  user: 'hzzzmldlaiilod', 
+  password: 'df13f79ffcb41b78ab699e0c83ed0b2242a46998452f695801960aadfa537ecb', 
+  database: 'd9pkdpcs2h6s3m', 
+  port: '5432',
+  ssl:{
+      rejectUnauthorized: false
+  }
+});
+module.exports = pool;

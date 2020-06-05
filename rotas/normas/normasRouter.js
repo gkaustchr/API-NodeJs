@@ -5,10 +5,10 @@ const {Pool} =  require('pg');
 //const db = require('../../banco/db');
 
 const pool = new Pool({
-    host: 'ec2-3-231-16-122.compute-1.amazonaws.com', 
-    user: 'urraxlvlfdnhbs', 
-    password: '1cef42cfa48b2faeffa2b2f08fdaff16fdc452b7a4cbaa6ebbeab9feac18ef01', 
-    database: 'd2104pj32c4hmd', 
+    host: 'ec2-34-225-162-157.compute-1.amazonaws.com', 
+    user: 'hzzzmldlaiilod', 
+    password: 'df13f79ffcb41b78ab699e0c83ed0b2242a46998452f695801960aadfa537ecb', 
+    database: 'd9pkdpcs2h6s3m', 
     port: '5432',
     ssl:{
         rejectUnauthorized: false
@@ -61,19 +61,19 @@ router.post('/', async(req, res) =>{
 
 
 
-//UPDATE de um Atributo Normas
+/*/UPDATE de um Atributo Normas
 router.patch('/:id', (req, res, next) => {
     sql.query('UPDATE `customer` SET `nome`=?,`abreviacao`=?,`descricao`=?,`img`=? ,`imgMobile`=? where `Id`=?', [req.body.nome, req.body.abreviacao, req.body.descricao, req.body.img, req.body.imgMobile, req.body.Id], function (error, results, fields) {
         if (error) throw error;
         res.end(JSON.stringify(results));
       });
-});
+});*/
 
 
 //DELETE de um Produto
 router.delete('/:id', (req, res, next) => {
     console.log(req.body);
-    sql.query('DELETE FROM `normas` WHERE `Id`=?', [req.body.id], function (error, results, fields) {
+    sql.query('DELETE FROM `normas` WHERE `id`=?', [req.body.id], function (error, results, fields) {
        if (error) throw error;
        res.end('Norma has been deleted!');
      });
