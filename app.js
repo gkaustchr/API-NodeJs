@@ -43,7 +43,7 @@ app.use((req, res, next) => {
 
 //Chamando Rotas
 app.use('/normas', normasRouter);
-app.use('/conteudoNormas', conteudoNormasRouter);
+app.use('/conteudonormas', conteudoNormasRouter);
 
 app.use('/leis', leisRouter);
 

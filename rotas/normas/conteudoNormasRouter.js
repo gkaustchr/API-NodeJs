@@ -33,7 +33,7 @@ router.get('/', async(req, res, next) =>{
 
 //Lista Todos Texto da Norma x
 router.get('/:id', async(req, res, next) => {
-    await pool.query('select * from conteudonormas where idNorma = $1', [req.params.id], function (error, results, fields) {
+    await pool.query('select * from conteudonormas where id = $1', [req.params.id], function (error, results, fields) {
         if (error) throw error;
         if(results.rows != ""){
             res.end(JSON.stringify(results.rows))
@@ -48,8 +48,8 @@ router.get('/:id', async(req, res, next) => {
 });
 
 //SELECT ConteudoNormas por IdNormas
-router.get('/:idNorma/conteudo/:idConteudo', async(req, res, next) => {
-    await pool.query('select * from conteudonormas where idNorma= $1 AND id= $2', [req.params.idNorma, req.params.idConteudo] , function (error, results, fields) {
+router.get('/norma/:idNorma', async(req, res, next) => {
+    await pool.query('select * from conteudonormas where idNorma= $1', [req.params.idNorma] , function (error, results, fields) {
         if (error) throw error;
         if(results.rows != ""){
             res.end(JSON.stringify(results.rows))
